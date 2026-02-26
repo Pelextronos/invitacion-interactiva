@@ -1,11 +1,81 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* FUENTE */
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+
+  /* FONDO */
+  background-image: url("fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* FIX ANDROID */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+/* CAPA OSCURA SUAVE */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* CONTENEDOR VIDRIO */
+.contenedor {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 25px;
+  padding: 40px 25px;
+  width: 90%;
+  max-width: 550px;
+  animation: fadeIn 1.2s ease;
+}
+
+/* TITULOS */
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+/* OCULTAR SECCIONES */
+.hidden {
+  display: none;
+}
+
+/* JUEGO */
 .game-board {
-  margin-top: 30px;
+  margin-top: 25px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  width: 100%;
 }
 
+/* CARTAS */
 .card {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -30,21 +100,65 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  border-radius: 15px;
   backface-visibility: hidden;
 }
 
+/* 🎨 COLORES PASTEL PARA CARTAS */
 .card-front {
-  background: gold;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
 }
 
 .card-back {
   transform: rotateY(180deg);
+  background: #ffffff;
 }
 
 .card-back img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 15px;
+}
+
+/* EVENTO */
+.fecha {
+  margin: 15px 0;
+  font-size: 1.1rem;
+}
+
+/* COUNTDOWN */
+#countdown {
+  margin: 15px 0 25px 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+/* BOTÓN */
+.btn {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #ffd6e0;
+  color: #333;
+  font-weight: bold;
+  border-radius: 40px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #fff;
+  transform: scale(1.05);
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
