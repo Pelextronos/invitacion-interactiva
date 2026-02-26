@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // IMÁGENES
   // ===============================
   const images = [
-    "img/foto1.jpg",
-    "img/foto2.jpg",
-    "img/foto3.jpg"
+    "img/foto1.jpg?v=2",
+    "img/foto2.jpg?v=2",
+    "img/foto3.jpg?v=2"
   ];
 
   let cardsArray = [...images, ...images];
