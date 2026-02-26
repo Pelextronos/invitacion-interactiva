@@ -1,25 +1,66 @@
-// CONFIGURACIÓN FECHA EVENTO
-const eventDate = new Date("January 25, 2026 20:00:00").getTime();
+// IMÁGENES DEL JUEGO
+const images = [
+  "img/1.jpg",
+  "img/2.jpg",
+  "img/3.jpg",
+  "img/4.jpg",
+  "img/5.jpg",
+  "img/6.jpg"
+];
 
-const countdownElement = document.getElementById("countdown");
+// DUPLICAMOS PARA HACER PARES
+let gameCards = [...images, ...images];
 
-const interval = setInterval(() => {
+// MEZCLAR CARTAS
+gameCards.sort(() => 0.5 - Math.random());
 
-  const now = new Date().getTime();
-  const distance = eventDate - now;
+const board = document.getElementById("game-board");
 
-  if (distance <= 0) {
-    clearInterval(interval);
-    countdownElement.innerHTML = "🎉 ¡Ya comenzó la fiesta!";
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+
+// CREAR TABLERO
+gameCards.forEach((imgSrc) => {
+  const card = document.createElement("div");
+  card.classList.add("card");
+
+  card.innerHTML = `
+    <div class="card-inner">
+      <div class="card-front"></div>
+      <div class="card-back">
+        <img src="${imgSrc}" alt="foto">
+      </div>
+    </div>
+  `;
+
+  card.addEventListener("click", () => flipCard(card));
+  board.appendChild(card);
+});
+
+// GIRAR CARTA
+function flipCard(card) {
+  if (lockBoard) return;
+  if (card === firstCard) return;
+
+  card.classList.add("flip");
+
+  if (!firstCard) {
+    firstCard = card;
     return;
   }
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  secondCard = card;
+  checkMatch();
+}
 
-  countdownElement.innerHTML =
-    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+// VERIFICAR MATCH
+function checkMatch() {
+  const img1 = firstCard.querySelector("img").src;
+  const img2 = secondCard.querySelector("img").src;
 
-}, 1000);
+  if (img1 === img2) {
+    resetTurn();
+  } else {
+    lockBoard = true;
+    setTimeout(() => {
