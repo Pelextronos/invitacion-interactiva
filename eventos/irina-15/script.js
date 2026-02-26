@@ -1,27 +1,38 @@
-// IMÁGENES DEL JUEGO
+// ===============================
+// CONFIGURACIÓN IMÁGENES
+// ===============================
+
 const images = [
-  "img/1.jpg",
-  "img/2.jpg",
-  "img/3.jpg",
-  "img/4.jpg",
-  "img/5.jpg",
-  "img/6.jpg"
+  "img/foto1.jpg",
+  "img/foto2.jpg",
+  "img/foto3.jpg"
 ];
 
-// DUPLICAMOS PARA HACER PARES
-let gameCards = [...images, ...images];
+// Duplicamos para crear pares (6 cartas)
+let cardsArray = [...images, ...images];
 
-// MEZCLAR CARTAS
-gameCards.sort(() => 0.5 - Math.random());
+// Mezclar cartas
+cardsArray.sort(() => 0.5 - Math.random());
+
+// ===============================
+// VARIABLES
+// ===============================
 
 const board = document.getElementById("game-board");
+const gameSection = document.getElementById("game-section");
+const eventSection = document.getElementById("event-section");
 
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let matches = 0;
 
+// ===============================
 // CREAR TABLERO
-gameCards.forEach((imgSrc) => {
+// ===============================
+
+cardsArray.forEach((imgSrc) => {
+
   const card = document.createElement("div");
   card.classList.add("card");
 
@@ -36,10 +47,15 @@ gameCards.forEach((imgSrc) => {
 
   card.addEventListener("click", () => flipCard(card));
   board.appendChild(card);
+
 });
 
-// GIRAR CARTA
+// ===============================
+// FUNCIONES DEL JUEGO
+// ===============================
+
 function flipCard(card) {
+
   if (lockBoard) return;
   if (card === firstCard) return;
 
@@ -54,13 +70,80 @@ function flipCard(card) {
   checkMatch();
 }
 
-// VERIFICAR MATCH
 function checkMatch() {
+
   const img1 = firstCard.querySelector("img").src;
   const img2 = secondCard.querySelector("img").src;
 
   if (img1 === img2) {
+
+    matches++;
     resetTurn();
+
+    if (matches === 3) {
+      winGame();
+    }
+
   } else {
+
     lockBoard = true;
+
     setTimeout(() => {
+      firstCard.classList.remove("flip");
+      secondCard.classList.remove("flip");
+      resetTurn();
+    }, 900);
+  }
+}
+
+function resetTurn() {
+  [firstCard, secondCard] = [null, null];
+  lockBoard = false;
+}
+
+// ===============================
+// GANAR JUEGO
+// ===============================
+
+function winGame() {
+
+  setTimeout(() => {
+
+    gameSection.classList.add("hidden");
+    eventSection.classList.remove("hidden");
+
+    startCountdown();
+
+  }, 800);
+}
+
+// ===============================
+// CUENTA REGRESIVA
+// ===============================
+
+function startCountdown() {
+
+  const eventDate = new Date("January 25, 2026 20:00:00").getTime();
+  const countdownElement = document.getElementById("countdown");
+
+  const interval = setInterval(() => {
+
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if (distance <= 0) {
+      clearInterval(interval);
+      countdownElement.innerHTML = "🎉 ¡La fiesta comenzó!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownElement.innerHTML =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+  }, 1000);
+}
