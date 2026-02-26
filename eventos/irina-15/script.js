@@ -1,57 +1,25 @@
-const images = [
-  'img/foto1.jpg',
-  'img/foto2.jpg',
-  'img/foto3.jpg'
-];
+// CONFIGURACIÓN FECHA EVENTO
+const eventDate = new Date("January 25, 2026 20:00:00").getTime();
 
-let cards = [...images, ...images];
-cards.sort(() => 0.5 - Math.random());
+const countdownElement = document.getElementById("countdown");
 
-const gameBoard = document.getElementById('game');
-let firstCard = null;
-let lock = false;
-let matches = 0;
+const interval = setInterval(() => {
 
-cards.forEach(src => {
-  const card = document.createElement('div');
-  card.className = 'card';
+  const now = new Date().getTime();
+  const distance = eventDate - now;
 
-  const img = document.createElement('img');
-  img.src = src;
+  if (distance <= 0) {
+    clearInterval(interval);
+    countdownElement.innerHTML = "🎉 ¡Ya comenzó la fiesta!";
+    return;
+  }
 
-  card.appendChild(img);
-  gameBoard.appendChild(card);
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  card.addEventListener('click', () => {
-    if (lock || card === firstCard || card.classList.contains('flipped')) return;
+  countdownElement.innerHTML =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-    card.classList.add('flipped');
-
-    if (!firstCard) {
-      firstCard = card;
-    } else {
-      if (firstCard.querySelector('img').src === img.src) {
-        matches++;
-        firstCard = null;
-
-        if (matches === images.length) {
-          setTimeout(showInvitation, 600);
-        }
-      } else {
-        lock = true;
-        setTimeout(() => {
-          card.classList.remove('flipped');
-          firstCard.classList.remove('flipped');
-          firstCard = null;
-          lock = false;
-        }, 800);
-      }
-    }
-  });
-});
-
-function showInvitation() {
-  document.getElementById('game').style.display = 'none';
-  document.querySelector('.subtitle').style.display = 'none';
-  document.getElementById('invitation').classList.remove('hidden');
-}
+}, 1000);
