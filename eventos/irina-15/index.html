@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Irina - 15 Años</title>
-  <meta name="description" content="Te invitamos a celebrar los 15 años de Irina. ¡No faltes!">
 
-  <!-- Open Graph -->
+  <title>Irina - 15 Años</title>
+  <meta name="description" content="Descubrí todos los detalles del cumpleaños de Irina jugando el desafío 💖">
+
+  <!-- Open Graph (WhatsApp Preview) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Irina - 15 Años">
-  <meta property="og:description" content="Te invitamos a celebrar los 15 años de Irina. ¡No faltes!">
-  <meta property="og:image" content="preview.jpg">
+  <meta property="og:title" content="Invitación - Irina 15 🎉">
+  <meta property="og:description" content="Jugá, encontrá los pares y descubrí todos los detalles del evento 💖">
+  <meta property="og:image" content="https://pelextronos.github.io/invitacion-interactiva/eventos/irina-15/preview.jpg">
   <meta property="og:url" content="https://pelextronos.github.io/invitacion-interactiva/eventos/irina-15/">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,21 +25,31 @@
 
   <div class="contenedor">
 
-    <h1>Irina</h1>
-    <h2>Mis 15 Años</h2>
+    <!-- PANTALLA JUEGO -->
+    <section id="game-section">
+      <h1>Irina</h1>
+      <h2>Desafío 15 Años 💖</h2>
+      <p>Encontrá todos los pares para desbloquear la invitación</p>
 
-    <p class="fecha">25 Enero 2026 - 20:00 hs</p>
+      <div id="game-board" class="game-board"></div>
+    </section>
 
-    <div id="countdown"></div>
 
-    <!-- JUEGO -->
-    <h3>Encontrá los pares 💖</h3>
-<div id="game-board" class="game-board"></div>
+    <!-- PANTALLA EVENTO (OCULTA) -->
+    <section id="event-section" class="hidden">
 
-    <!-- BOTÓN -->
-    <a class="btn" href="https://wa.me/549XXXXXXXXXX" target="_blank">
-      Confirmar Asistencia
-    </a>
+      <h1>Irina</h1>
+      <h2>Mis 15 Años</h2>
+
+      <p class="fecha">25 Enero 2026 - 20:00 hs</p>
+
+      <div id="countdown"></div>
+
+      <a class="btn" href="https://wa.me/549XXXXXXXXXX" target="_blank">
+        Confirmar Asistencia
+      </a>
+
+    </section>
 
   </div>
 
