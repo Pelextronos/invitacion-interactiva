@@ -1,59 +1,36 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
   <title>Irina - 15 Años</title>
-  <meta name="description" content="Estás invitado a los 15 años de Irina. ¡Te esperamos para una noche inolvidable!">
+  <meta name="description" content="Te invitamos a celebrar los 15 años de Irina. ¡No faltes!">
 
-  <!-- Open Graph para WhatsApp / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Irina - 15 Años">
   <meta property="og:description" content="Te invitamos a celebrar los 15 años de Irina. ¡No faltes!">
-  <meta property="og:image" content="https://pelextronos.github.io/invitacion-interactiva/eventos/irina-15/preview.jpg">
+  <meta property="og:image" content="preview.jpg">
   <meta property="og:url" content="https://pelextronos.github.io/invitacion-interactiva/eventos/irina-15/">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
 
-  <!-- Twitter Card (también ayuda a algunos previews) -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Irina - 15 Años">
-  <meta name="twitter:description" content="Te invitamos a celebrar los 15 años de Irina. ¡No faltes!">
-  <meta name="twitter:image" content="https://pelextronos.github.io/invitacion-interactiva/eventos/irina-15/preview.jpg">
-
-  <link rel="icon" href="https://pelextronos.github.io/invitacion-interactiva/eventos/irina-15/preview.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-  <div class="container">
+<body class="tema-irina">
 
-    <h1>¿Encontrás todos los pares?</h1>
-    <p class="subtitle">Descubrí dónde será mi cumpleaños 🎉</p>
+  <div class="overlay"></div>
 
-    <!-- JUEGO -->
-    <div id="game" class="game-board"></div>
+  <div class="contenedor">
+    <h1>Irina</h1>
+    <h2>Mis 15 Años</h2>
 
-    <!-- INVITACIÓN (oculta al inicio) -->
-    <div id="invitation" class="hidden">
-      <h2>🎂 Estás invitado 🎂</h2>
+    <p class="fecha">25 Enero 2026 - 20:00 hs</p>
 
-      <div class="invite-box">
-        <p><strong>Cumple:</strong> Irina</p>
-        <p><strong>Fecha:</strong> 27 de Julio</p>
-        <p><strong>Hora:</strong> 17:00 hs</p>
-        <p><strong>Lugar:</strong> Salón La Frida - Calle falss 123 Burzaco.</p>
-      </div>
+    <div id="countdown"></div>
 
-      <a
-        class="whatsapp"
-        href="https://wa.me/5491155668856?text=Hola%20quiero%20una%20invitación%20interactiva"
-        target="_blank"
-      >
-        📲 Quiero mi invitación interactiva
-      </a>
-    </div>
-
+    <a class="btn" href="https://wa.me/549XXXXXXXXXX" target="_blank">
+      Confirmar Asistencia
+    </a>
   </div>
 
   <script src="script.js"></script>
