@@ -72,3 +72,24 @@ body {
   text-decoration: none;
   font-weight: bold;
 }
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo general */
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+
+  background-image: url("fondo.jpg"); /* ← Cambiá por tu imagen */
+  background-size: cover;            /* Ajusta sin deformar */
+  background-position: center;       /* Centra la imagen */
+  background-repeat: no-repeat;      
+  background-attachment: fixed;      /* Efecto elegante tipo parallax */
+
+  display: flex;
+  flex-direction: column;
+}
