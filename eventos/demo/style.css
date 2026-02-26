@@ -72,3 +72,11 @@ body {
   text-decoration: none;
   font-weight: bold;
 }
+.card {
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card.flipped {
+  background: #ff5fa2;
+  transform: scale(1.05);
+}
