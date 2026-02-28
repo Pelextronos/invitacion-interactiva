@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Respiración 4-7-8</title>
+
   <style>
     body {
       margin: 0;
@@ -10,50 +11,69 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #0f172a;
+      background: radial-gradient(circle at center, #1e293b, #0f172a);
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
     }
 
     .container {
-      font-size: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .circle {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: #22c55e;
+      margin-bottom: 30px;
+      transition: transform 1s linear;
     }
 
     .phase {
       font-size: 2rem;
-      margin-bottom: 20px;
-      opacity: 0.7;
+      opacity: 0.8;
+    }
+
+    .counter {
+      font-size: 3rem;
+      margin-top: 10px;
     }
 
     button {
       margin-top: 30px;
-      padding: 10px 20px;
+      padding: 10px 25px;
       font-size: 1rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       background: #22c55e;
       color: black;
+      font-weight: bold;
     }
   </style>
 </head>
+
 <body>
 
   <div class="container">
+    <div class="circle" id="circle"></div>
     <div class="phase" id="phase">Presioná iniciar</div>
-    <div id="counter">4</div>
+    <div class="counter" id="counter">4</div>
     <button onclick="startBreathing()">Iniciar</button>
   </div>
 
   <script>
     const phaseEl = document.getElementById("phase");
     const counterEl = document.getElementById("counter");
+    const circle = document.getElementById("circle");
 
     const phases = [
-      { name: "Inhalá", time: 4 },
-      { name: "Sostené", time: 7 },
-      { name: "Exhalá", time: 8 },
+      { name: "Inhalá", time: 4, scale: 1.5 },
+      { name: "Sostené", time: 7, scale: 1.5 },
+      { name: "Exhalá", time: 8, scale: 1 }
     ];
 
     let running = false;
@@ -64,14 +84,34 @@
 
       while (running) {
         for (let phase of phases) {
+
           phaseEl.textContent = phase.name;
+          speak(phase.name);
+
+          circle.style.transform = `scale(${phase.scale})`;
 
           for (let i = phase.time; i > 0; i--) {
             counterEl.textContent = i;
+            speakNumber(i);
             await sleep(1000);
           }
         }
       }
+    }
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "es-ES";
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakNumber(num) {
+      const utterance = new SpeechSynthesisUtterance(num.toString());
+      utterance.lang = "es-ES";
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
     }
 
     function sleep(ms) {
