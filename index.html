@@ -1,11 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Invitación interactiva</title>
+  <meta charset="UTF-8" />
+  <title>Respiración 4-7-8</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0f172a;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      font-size: 3rem;
+    }
+
+    .phase {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #22c55e;
+      color: black;
+    }
+  </style>
 </head>
 <body>
-  <h1>Invitación interactiva</h1>
-  <p>Próximamente el juego 🎮</p>
+
+  <div class="container">
+    <div class="phase" id="phase">Presioná iniciar</div>
+    <div id="counter">4</div>
+    <button onclick="startBreathing()">Iniciar</button>
+  </div>
+
+  <script>
+    const phaseEl = document.getElementById("phase");
+    const counterEl = document.getElementById("counter");
+
+    const phases = [
+      { name: "Inhalá", time: 4 },
+      { name: "Sostené", time: 7 },
+      { name: "Exhalá", time: 8 },
+    ];
+
+    let running = false;
+
+    async function startBreathing() {
+      if (running) return;
+      running = true;
+
+      while (running) {
+        for (let phase of phases) {
+          phaseEl.textContent = phase.name;
+
+          for (let i = phase.time; i > 0; i--) {
+            counterEl.textContent = i;
+            await sleep(1000);
+          }
+        }
+      }
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+  </script>
+
 </body>
 </html>
